@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//这句话很重要有mybatis记得加
 @MapperScan("com.plumblum.dao")
 public class PlumblumApplication {
 
