@@ -1,6 +1,6 @@
 package com.plumblum.dao;
 
-import com.plumblum.model.UserEntity;
+import com.plumblum.entity.UserEntity;
 
 import java.util.List;
 

@@ -1,10 +1,9 @@
 package com.plumblum.service.serviceImpl;
 
 import com.plumblum.dao.UserMapper;
-import com.plumblum.model.UserEntity;
+import com.plumblum.entity.UserEntity;
 import com.plumblum.service.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.plumblum.model;
+package com.plumblum.entity;
 
 import java.io.Serializable;
 

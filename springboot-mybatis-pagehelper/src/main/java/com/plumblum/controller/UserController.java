@@ -2,7 +2,7 @@ package com.plumblum.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.plumblum.model.UserEntity;
+import com.plumblum.entity.UserEntity;
 import com.plumblum.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
