@@ -1,8 +1,9 @@
 package com.plumblum.entity;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 
-
+@Entity
 public class Role implements Serializable {
     private Long id;
     private String role; //角色标识 程序中判断使用,如"admin"

@@ -1,8 +1,9 @@
 package com.plumblum.entity;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 
-
+@Entity
 public class RolePermsision implements Serializable {
 
     private Long roleId;
