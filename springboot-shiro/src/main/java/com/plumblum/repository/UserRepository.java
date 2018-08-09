@@ -2,6 +2,9 @@ package com.plumblum.repository;
 
 import com.plumblum.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @Auther: cpb
@@ -9,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Description:
  */
 public interface UserRepository extends JpaRepository<User,Long>{
+    @Query("select t from sys_user t where t.username = ?1")
+    List<User> findByName(String userName);
 }

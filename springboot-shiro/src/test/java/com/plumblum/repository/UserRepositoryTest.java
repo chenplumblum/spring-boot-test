@@ -20,6 +20,11 @@ public class UserRepositoryTest {
     @Resource
     private UserRepository userRepository;
 
+    @Test
+    public void findByName(){
+        userRepository.findByName("zhang");
+    }
+
 //    @Test
 //    public void add(){
 //        User usersEntity = new User();
