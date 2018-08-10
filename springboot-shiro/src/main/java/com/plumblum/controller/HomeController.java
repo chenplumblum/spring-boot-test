@@ -19,11 +19,13 @@ public class HomeController {
         return"/index";
     }
 
-    @RequestMapping("/login")
+
+
+    @RequestMapping("/sys/login")
     public R login(String username, String password) throws IOException {
+        System.out.println(username);
+        Subject subject = SecurityUtils.getSubject();
         try {
-            System.out.println(username);
-            Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             subject.login(token);
         } catch (UnknownAccountException e) {
@@ -35,7 +37,10 @@ public class HomeController {
         } catch (AuthenticationException e) {
             return R.error("账户验证失败");
         }
-
+        if(subject.hasRole("admin")) {
+            System.out.println("ok");
+        }
+        SecurityUtils.getSubject().logout();
         return R.ok();
     }
 
