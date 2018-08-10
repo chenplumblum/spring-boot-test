@@ -1,7 +1,5 @@
 package com.plumblum.repository;
 
-import com.plumblum.entity.User;
-import com.plumblum.entity.UsersEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

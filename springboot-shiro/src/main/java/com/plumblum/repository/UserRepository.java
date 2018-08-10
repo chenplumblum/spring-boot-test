@@ -12,6 +12,6 @@ import java.util.List;
  * @Description:
  */
 public interface UserRepository extends JpaRepository<User,Long>{
-    @Query("select t from sys_user t where t.username = ?1")
-    List<User> findByName(String userName);
+    @Query("select t from User t where t.username = ?1")
+    User findByName(String userName);
 }

@@ -1,33 +1,34 @@
 package com.plumblum.entity;
 
-import javax.persistence.Entity;
-import java.io.Serializable;
+import javax.persistence.*;
 
+/**
+ * @Auther: cpb
+ * @Date: 2018/8/10 10:17
+ * @Description:
+ */
 @Entity
-public class User implements Serializable {
-    private Long id;
+@Table(name = "sys_user", schema = "shiro", catalog = "")
+public class User {
+    @Id
+    private long id;
     private String username;
     private String password;
     private String salt;
+    private Byte locked;
 
-    private Boolean locked = Boolean.FALSE;
-
-    public User() {
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public Long getId() {
+    @Basic
+    @Column(name = "id")
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -36,6 +37,8 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -44,6 +47,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "salt")
     public String getSalt() {
         return salt;
     }
@@ -52,15 +57,13 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public String getCredentialsSalt() {
-        return username + salt;
-    }
-
-    public Boolean getLocked() {
+    @Basic
+    @Column(name = "locked")
+    public Byte getLocked() {
         return locked;
     }
 
-    public void setLocked(Boolean locked) {
+    public void setLocked(Byte locked) {
         this.locked = locked;
     }
 
@@ -71,24 +74,27 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (id != user.id) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (salt != null ? !salt.equals(user.salt) : user.salt != null) return false;
+        if (locked != null ? !locked.equals(user.locked) : user.locked != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (salt != null ? salt.hashCode() : 0);
+        result = 31 * result + (locked != null ? locked.hashCode() : 0);
+        return result;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", locked=" + locked +
-                '}';
+    //验证盐
+    public String getCredentialsSalt() {
+        return username + salt;
     }
 }

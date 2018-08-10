@@ -2,7 +2,6 @@ package com.plumblum.dao;
 
 
 import com.plumblum.entity.User;
-import com.plumblum.entity.UsersEntity;
 
 import java.util.List;
 
@@ -13,5 +12,6 @@ import java.util.List;
  */
 public interface UserMapper {
     List<User> getAll();
+
 
 }

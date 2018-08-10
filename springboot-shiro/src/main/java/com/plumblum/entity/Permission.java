@@ -1,33 +1,33 @@
 package com.plumblum.entity;
 
-import javax.persistence.Entity;
-import java.io.Serializable;
+import javax.persistence.*;
 
+/**
+ * @Auther: cpb
+ * @Date: 2018/8/10 10:17
+ * @Description:
+ */
 @Entity
-public class Permission implements Serializable {
+@Table(name = "sys_permission", schema = "shiro", catalog = "")
+public class Permission {
+    @Id
+    private long id;
+    private String permission;
+    private String description;
+    private Byte available;
 
-    private Long id;
-    private String permission; //权限标识 程序中判断使用,如"user:create"
-    private String description; //权限描述,UI界面显示使用
-    private Boolean available = Boolean.FALSE; //是否可用,如果不可用将不会添加给用户
-
-    public Permission() {
-    }
-
-    public Permission(String permission, String description, Boolean available) {
-        this.permission = permission;
-        this.description = description;
-        this.available = available;
-    }
-
-    public Long getId() {
+    @Basic
+    @Column(name = "id")
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "permission")
     public String getPermission() {
         return permission;
     }
@@ -36,6 +36,8 @@ public class Permission implements Serializable {
         this.permission = permission;
     }
 
+    @Basic
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -44,11 +46,13 @@ public class Permission implements Serializable {
         this.description = description;
     }
 
-    public Boolean getAvailable() {
+    @Basic
+    @Column(name = "available")
+    public Byte getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(Byte available) {
         this.available = available;
     }
 
@@ -57,25 +61,22 @@ public class Permission implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Permission role = (Permission) o;
+        Permission that = (Permission) o;
 
-        if (id != null ? !id.equals(role.id) : role.id != null) return false;
+        if (id != that.id) return false;
+        if (permission != null ? !permission.equals(that.permission) : that.permission != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (available != null ? !available.equals(that.available) : that.available != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", permission='" + permission + '\'' +
-                ", description='" + description + '\'' +
-                ", available=" + available +
-                '}';
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (permission != null ? permission.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (available != null ? available.hashCode() : 0);
+        return result;
     }
 }

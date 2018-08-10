@@ -2,7 +2,6 @@ package com.plumblum.dao;
 
 
 import com.plumblum.entity.Permission;
-import com.plumblum.entity.UsersEntity;
 
 import java.util.List;
 
@@ -12,6 +11,6 @@ import java.util.List;
  * @Description:
  */
 public interface PermissionMapper {
-    List<Permission> getAll();
+    List<Permission> findPermissions(String userName);
 
 }

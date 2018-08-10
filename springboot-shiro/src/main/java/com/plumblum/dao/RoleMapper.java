@@ -2,7 +2,6 @@ package com.plumblum.dao;
 
 
 import com.plumblum.entity.Role;
-import com.plumblum.entity.UsersEntity;
 
 import java.util.List;
 

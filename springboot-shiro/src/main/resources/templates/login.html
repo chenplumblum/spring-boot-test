@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+<!--<h4 th:text="${msg}">错误信息：</h4>-->
+{{errorMsg}}
+<div id="login" v-cloak>
+
+    <p>账号：<input type="text" v-model="username" /></p>
+    <p>密码：<input type="text" v-model="password" /></p>
+
+    <!--<p><input type="submit" value="登录" /></p>-->
+    <button type="button"  @click="login">登录</button>
+</div>
+<script type="text/javascript">
+
+    var vm = new Vue({
+        el: '#login',
+        data: {
+            username: '',
+            password: '',
+        },
+        methods: {
+            login: function (event) {
+                var data = "username=" + vm.username + "&password=" + vm.password;
+                $.ajax({
+                    type: "POST",
+                    url: "/login",
+                    data: data,
+                    dataType: "json",
+                    success: function (result) {
+                        console.log("ok");
+                        if (result.code == 0) {//登录成功
+                            window.location.href = 'index.html';
+                        } else {
+                            vm.error = true;
+                            vm.errorMsg = result.msg;
+                        }
+                    }
+                });
+            }
+        },
+        created: function () {
+
+//            // 加载车辆
+//            axios.get('../../basic/arrangecar/list', {
+//                    params: {currentPage: 1, pageSize: 5}
+//                }
+//            ).then(function (response) {
+//                if (response.data.code == 0) {
+//                    vue.arrangecar = response.data.pageInfo.list;
+//                    vue.total = response.data.pageInfo.total;
+//                } else {
+//                    vue.$message({
+//                        message: '加载车辆数据失败',
+//                        type: 'error'
+//                    });
+//                }
+//            });
+
+
+        }
+    });
+    $('.goBack').click(function(){
+        window.location.href='../programme/pageUPS.html';
+    })
+</script>
+</body>
+</html>

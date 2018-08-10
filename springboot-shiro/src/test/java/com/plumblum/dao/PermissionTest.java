@@ -1,6 +1,6 @@
 package com.plumblum.dao;
 
-import com.plumblum.entity.Role;
+import com.plumblum.entity.Permission;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,19 +18,19 @@ import java.util.Set;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RoleTest {
+public class PermissionTest {
     @Resource
-    private RoleMapper roleMapper;
+    private PermissionMapper permissionMapper;
 
 
 
     @Test
     public void test(){
-       List<Role> list =  roleMapper.findRoles("zhang");
+       List<Permission> list = permissionMapper.findPermissions("zhang");
         Set<String> set = new HashSet<>();
-       for (Role role:list){
-           set.add(role.getRole());
-       }
+        for(Permission permission:list){
+            set.add(permission.getPermission());
+        }
         System.out.println(set);
     }
 
