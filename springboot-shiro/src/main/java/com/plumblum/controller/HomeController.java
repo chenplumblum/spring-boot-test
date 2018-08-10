@@ -16,10 +16,13 @@ import java.util.Map;
 public class HomeController {
     @RequestMapping({"/","/index"})
     public String index(){
-        return"/index";
+        return "/index";
     }
 
-
+    @RequestMapping("/index")
+    public String login(){
+        return "/login";
+    }
 
     @RequestMapping("/sys/login")
     public R login(String username, String password) throws IOException {
