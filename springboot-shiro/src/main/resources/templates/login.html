@@ -7,9 +7,13 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-<!--<h4 th:text="${msg}">错误信息：</h4>-->
-{{errorMsg}}
+
+
 <div id="login" v-cloak>
+
+    <div v-if="error">
+        <h4>{{errorMsg}}</h4>
+    </div>
 
     <p>账号：<input type="text" v-model="username" /></p>
     <p>密码：<input type="text" v-model="password" /></p>
@@ -23,7 +27,9 @@
         el: '#login',
         data: {
             username: '',
-            password: ''
+            password: '',
+            error:false,
+            errorMsg: ''
         },
         methods: {
             login: function (event) {
@@ -34,9 +40,8 @@
                     data: data,
                     dataType: "json",
                     success: function (result) {
-                        console.log("ok");
                         if (result.code == 0) {//登录成功
-                            window.location.href = 'index.html';
+                            window.location.href = 'index';
                         } else {
                             vm.error = true;
                             vm.errorMsg = result.msg;

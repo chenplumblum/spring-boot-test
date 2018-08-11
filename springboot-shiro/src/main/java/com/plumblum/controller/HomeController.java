@@ -7,6 +7,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -25,10 +27,11 @@ public class HomeController {
     }
 
     @RequestMapping("/sys/login")
-    public R login(String username, String password) throws IOException {
+    @ResponseBody
+    public static R login(@RequestParam String username, String password) throws IOException {
         System.out.println(username);
-        Subject subject = SecurityUtils.getSubject();
         try {
+            Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             subject.login(token);
         } catch (UnknownAccountException e) {
@@ -40,10 +43,10 @@ public class HomeController {
         } catch (AuthenticationException e) {
             return R.error("账户验证失败");
         }
-        if(subject.hasRole("admin")) {
-            System.out.println("ok");
-        }
-        SecurityUtils.getSubject().logout();
+//        if(subject.hasRole("admin")) {
+//            System.out.println("ok");
+//        }
+//        SecurityUtils.getSubject().logout();
         return R.ok();
     }
 

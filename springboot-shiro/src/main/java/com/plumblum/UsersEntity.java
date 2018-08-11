@@ -1,4 +1,4 @@
-package com.plumblum.entity;
+package com.plumblum;
 
 import javax.persistence.*;
 
