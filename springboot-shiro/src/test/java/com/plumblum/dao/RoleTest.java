@@ -26,11 +26,9 @@ public class RoleTest {
 
     @Test
     public void test(){
-       List<Role> list =  roleMapper.findRoles("zhang");
+       List<String> list =  roleMapper.findRoles("zhang");
         Set<String> set = new HashSet<>();
-       for (Role role:list){
-           set.add(role.getRole());
-       }
+        set.addAll(list);
         System.out.println(set);
     }
 

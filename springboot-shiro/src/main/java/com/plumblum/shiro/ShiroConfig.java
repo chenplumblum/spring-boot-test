@@ -4,6 +4,7 @@ package com.plumblum.shiro;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -90,6 +91,15 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
+    /**
+     * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
+     * 负责org.apache.shiro.util.Initializable类型bean的生命周期的，初始化和销毁。
+     * 主要是AuthorizingRealm类的子类，以及EhCacheManager类。
+     */
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
 
     //非必要
     @Bean(name="simpleMappingExceptionResolver")
@@ -100,8 +110,8 @@ public class ShiroConfig {
         mappings.setProperty("DatabaseException", "databaseError");//数据库异常处理
         mappings.setProperty("UnauthorizedException","403");
         r.setExceptionMappings(mappings);  // None by default
-        r.setDefaultErrorView("error");    // No default
-        r.setExceptionAttribute("ex");     // Default is "exception"
+//        r.setDefaultErrorView("error");    // No default
+//        r.setExceptionAttribute("ex");     // Default is "exception"
         //r.setWarnLogCategory("example.MvcLogger");     // No default
         return r;
     }

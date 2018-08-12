@@ -30,10 +30,14 @@ public class HomeController {
     @ResponseBody
     public static R login(@RequestParam String username, String password) throws IOException {
         System.out.println(username);
+
         try {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             subject.login(token);
+//            if(subject.hasRole("admin")) {
+//                System.out.println("ok");
+//            }
         } catch (UnknownAccountException e) {
             return R.error(e.getMessage());
         } catch (IncorrectCredentialsException e) {
@@ -43,9 +47,7 @@ public class HomeController {
         } catch (AuthenticationException e) {
             return R.error("账户验证失败");
         }
-//        if(subject.hasRole("admin")) {
-//            System.out.println("ok");
-//        }
+
 //        SecurityUtils.getSubject().logout();
         return R.ok();
     }

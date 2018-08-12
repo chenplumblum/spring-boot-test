@@ -11,6 +11,6 @@ import java.util.List;
  * @Description:
  */
 public interface PermissionMapper {
-    List<Permission> findPermissions(String userName);
+    List<String> findPermissions(String userName);
 
 }

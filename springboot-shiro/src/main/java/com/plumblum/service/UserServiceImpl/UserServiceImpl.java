@@ -35,12 +35,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<Permission> findPermissions(String userName) {
+    public List<String> findPermissions(String userName) {
         return permissionMapper.findPermissions(userName);
     }
 
     @Override
-    public List<Role> findRoles(String userName) {
+    public List<String> findRoles(String userName) {
         return roleMapper.findRoles(userName);
     }
 }

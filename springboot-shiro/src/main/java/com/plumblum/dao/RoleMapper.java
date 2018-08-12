@@ -11,7 +11,7 @@ import java.util.List;
  * @Description:
  */
 public interface RoleMapper {
-    List<Role> findRoles(String userName);
+    List<String> findRoles(String userName);
 
 
 }

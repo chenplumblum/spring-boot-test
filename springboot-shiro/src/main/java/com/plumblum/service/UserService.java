@@ -14,8 +14,8 @@ import java.util.List;
 public interface UserService {
     User findByName(String userName);
 
-    List<Permission> findPermissions(String userName);
+    List<String> findPermissions(String userName);
 
-    List<Role> findRoles(String userName);
+    List<String> findRoles(String userName);
 
 }

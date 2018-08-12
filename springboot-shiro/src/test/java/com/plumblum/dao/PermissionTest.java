@@ -26,11 +26,9 @@ public class PermissionTest {
 
     @Test
     public void test(){
-       List<Permission> list = permissionMapper.findPermissions("zhang");
+       List<String> list = permissionMapper.findPermissions("zhang");
         Set<String> set = new HashSet<>();
-        for(Permission permission:list){
-            set.add(permission.getPermission());
-        }
+        set.addAll(list);
         System.out.println(set);
     }
 

@@ -28,23 +28,29 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String username = (String)principals.getPrimaryPrincipal();
+        System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
 
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        List<Role> role= userService.findRoles(username);
-        List<Permission> permission= userService.findPermissions(username);
+//        User user  = (User)principals.getPrimaryPrincipal();
+//        for(Role role:userInfo.getRoleList()){
+//            authorizationInfo.addRole(role.getRole());
+//            for(SysPermission p:role.getPermissions()){
+//                authorizationInfo.addStringPermission(p.getPermission());
+//            }
+//        }
+//        return authorizationInfo;
+        User user = (User) principals.getPrimaryPrincipal();
+
+
+        List<String> role= userService.findRoles(user.getUsername());
+        List<String> permission= userService.findPermissions(user.getUsername());
 
         Set<String> roleSet = new HashSet<>();
         Set<String> permissionSet = new HashSet<>();
 
-        for(Role role1 :role){
-            roleSet.add(role1.getRole());
-        }
-        for (Permission permission1:permission){
-            permissionSet.add(permission1.getPermission());
-        }
-        System.out.println(roleSet);
-        System.out.println(permissionSet);
+        roleSet.addAll(role);
+        permissionSet.addAll(permissionSet);
+
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         authorizationInfo.setRoles(roleSet);
         authorizationInfo.setStringPermissions(permissionSet);
 
