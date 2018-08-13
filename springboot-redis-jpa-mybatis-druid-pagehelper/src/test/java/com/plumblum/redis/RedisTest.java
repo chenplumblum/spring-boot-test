@@ -24,9 +24,7 @@ public class RedisTest {
     private RedisTemplate<String, Object> redisTemplate;
 
     @Test
-    public void test() throws Exception {
-
-        RedisObjectSerializer redisObjectSerializer = new RedisObjectSerializer();
+    public void redistest() {
 
         // 保存字符串
         stringRedisTemplate.opsForValue().set("aaa", "111");
@@ -34,7 +32,8 @@ public class RedisTest {
 
         // 保存对象
         User user = new User("超人", 20);
-        redisObjectSerializer.serialize(user);
+
+        System.out.println(user);
         redisTemplate.opsForValue().set(user.getUsername(), user);
 
         user = new User("蝙蝠侠", 30);
