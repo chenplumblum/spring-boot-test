@@ -30,29 +30,21 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
 
-//        User user  = (User)principals.getPrimaryPrincipal();
-//        for(Role role:userInfo.getRoleList()){
-//            authorizationInfo.addRole(role.getRole());
-//            for(SysPermission p:role.getPermissions()){
-//                authorizationInfo.addStringPermission(p.getPermission());
-//            }
-//        }
-//        return authorizationInfo;
         User user = (User) principals.getPrimaryPrincipal();
 
 
-        List<String> role= userService.findRoles(user.getUsername());
-        List<String> permission= userService.findPermissions(user.getUsername());
+        List<String> roleList= userService.findRoles(user.getUsername());
+        List<String> permissionList= userService.findPermissions(user.getUsername());
+        System.out.println(permissionList);
+        Set<String> role = new HashSet<>();
+        Set<String> permission = new HashSet<>(permissionList.size());
 
-        Set<String> roleSet = new HashSet<>();
-        Set<String> permissionSet = new HashSet<>();
-
-        roleSet.addAll(role);
-        permissionSet.addAll(permissionSet);
+        role.addAll(roleList);
+        permission.addAll(permissionList);
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(roleSet);
-        authorizationInfo.setStringPermissions(permissionSet);
+        authorizationInfo.setRoles(role);
+        authorizationInfo.setStringPermissions(permission);
 
         return authorizationInfo;
     }

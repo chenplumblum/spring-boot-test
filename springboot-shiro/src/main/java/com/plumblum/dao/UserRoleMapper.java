@@ -1,9 +1,6 @@
 package com.plumblum.dao;
 
 
-import com.plumblum.UsersEntity;
-
-import java.util.List;
 
 /**
  * @Auther: cpb
@@ -11,6 +8,6 @@ import java.util.List;
  * @Description:
  */
 public interface UserRoleMapper {
-    List<UsersEntity> getAll();
+
 
 }

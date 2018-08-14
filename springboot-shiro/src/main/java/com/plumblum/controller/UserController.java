@@ -1,12 +1,24 @@
 package com.plumblum.controller;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+
+    /**
+     * 用户角色;
+     * @return
+     */
+    @RequestMapping("/user")
+    @RequiresRoles("admin")
+    public String userInfoAdmin(){
+        return "userInfo";
+    }
 
 
     /**
@@ -19,8 +31,9 @@ public class UserController {
         return "userInfoAdd";
     }
 
+
     /**
-     * 用户删除;
+     * 用户更新;
      * @return
      */
     @RequestMapping("/userUpdate")
