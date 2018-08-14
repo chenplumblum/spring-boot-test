@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<h1>index</h1>
+<shiro:authenticated>
+    用户<shiro:principal property="username"/>已身份验证通过
+</shiro:authenticated>
+<a href="/logout">退出</a>
+
+<shiro:hasRole name="admin">
+    用户[<shiro:principal/>]拥有角色admin<br/>
+</shiro:hasRole>
+<shiro:hasPermission name="user:create">
+    用户[<shiro:principal/>]拥有权限userCreate<br/>
+</shiro:hasPermission>
+
+
+</body>
+</html>

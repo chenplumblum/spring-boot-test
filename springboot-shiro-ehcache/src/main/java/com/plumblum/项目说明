@@ -1,0 +1,8 @@
+一.增加缓存
+1.记得将要缓存的类序列化
+2.shiroconfig需要配置ehCacheManager 并加入 securityManager
+
+
+二.登录密码校验次数
+1.RetryLimitCredentialsMatcher
+2.修改shiroConfig 的 凭证匹配器
