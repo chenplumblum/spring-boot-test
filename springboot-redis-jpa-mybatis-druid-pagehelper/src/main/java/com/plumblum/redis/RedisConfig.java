@@ -66,9 +66,12 @@ public class RedisConfig {
         //配置redisTemplate
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
+
         RedisSerializer stringSerializer = new StringRedisSerializer();
+
         redisTemplate.setKeySerializer(stringSerializer);//key序列化
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);//value序列化
+
         redisTemplate.setHashKeySerializer(stringSerializer);//Hash key序列化
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);//Hash value序列化
         redisTemplate.afterPropertiesSet();
