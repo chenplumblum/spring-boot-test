@@ -28,16 +28,14 @@ public class HomeController {
 
     @RequestMapping("/sys/login")
     @ResponseBody
-    public static R login(@RequestParam String username, String password) throws IOException {
-        System.out.println(username);
+    public static R login(@RequestParam String username, String password,boolean rememberMe) throws IOException {
+
 
         try {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            token.setRememberMe(rememberMe);
             subject.login(token);
-//            if(subject.hasRole("admin")) {
-//                System.out.println("ok");
-//            }
         } catch (UnknownAccountException e) {
             return R.error(e.getMessage());
         } catch (IncorrectCredentialsException e) {

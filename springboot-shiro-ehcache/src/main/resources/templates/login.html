@@ -17,7 +17,12 @@
 
     <p>账号：<input type="text" v-model="username" /></p>
     <p>密码：<input type="text" v-model="password" /></p>
-
+    <!--下面是记住我输入框-->
+    <div class="checkbox">
+        <label>
+            <input v-model="rememberMe" type="checkbox" /> Remember me
+        </label>
+    </div>
     <!--<p><input type="submit" value="登录" /></p>-->
     <button type="button"  @click="login">登录</button>
 </div>
@@ -29,11 +34,13 @@
             username: '',
             password: '',
             error:false,
-            errorMsg: ''
+            errorMsg: '',
+            rememberMe:false
         },
         methods: {
             login: function (event) {
-                var data = "username=" + vm.username + "&password=" + vm.password;
+                var data = "username=" + vm.username + "&password=" + vm.password+"&rememberMe="+vm.rememberMe;
+                console.log(data);
                 $.ajax({
                     type: "POST",
                     url: "/sys/login",
