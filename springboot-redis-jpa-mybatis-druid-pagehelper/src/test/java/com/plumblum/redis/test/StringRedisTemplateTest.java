@@ -1,4 +1,4 @@
-package com.plumblum.redis;
+package com.plumblum.redis.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

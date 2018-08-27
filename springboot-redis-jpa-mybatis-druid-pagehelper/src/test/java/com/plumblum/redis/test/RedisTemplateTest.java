@@ -1,9 +1,11 @@
-package com.plumblum.redis;
+package com.plumblum.redis.test;
 
+import com.plumblum.redis.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.DefaultTypedTuple;
+import org.springframework.data.redis.core.HyperLogLogOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,53 +23,50 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 public class RedisTemplateTest {
     @Resource
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Test
-    public void string(){
+    public void string() {
         //set(name,value,time,timeUnit,offset(偏移量))
 
-        User user = new User("你好",20);
-        redisTemplate.opsForValue().set(user.getUsername(),user);
+        User user = new User("你好", 20);
+        redisTemplate.opsForValue().set(user.getUsername(), user);
         System.out.println(redisTemplate.opsForValue().get(user.getUsername()));
 
-        redisTemplate.opsForValue().set(user.getUsername(),user,4,TimeUnit.HOURS);
+        redisTemplate.opsForValue().set(user.getUsername(), user, 4, TimeUnit.HOURS);
         System.out.println(redisTemplate.opsForValue().get(user.getUsername()));
 
         String name = "increment";
-        Long  i = 10L;
-        redisTemplate.opsForValue().set(name,i);
-        redisTemplate.opsForValue().increment(name,i);
-
-
-
+        Long i = 10L;
+        redisTemplate.opsForValue().set(name, i);
+        redisTemplate.opsForValue().increment(name, i);
 
 
     }
 
     @Test
-    public void list(){
+    public void list() {
         String name = "my:listRight";
         ArrayList<User> list = new ArrayList<>();
-        User user1 = new User("你好",20);
-        User user2 = new User("谢谢",23);
+        User user1 = new User("你好", 20);
+        User user2 = new User("谢谢", 23);
         list.add(user1);
         list.add(user2);
-        redisTemplate.opsForList().rightPushAll(name,user1);
-        redisTemplate.opsForList().rightPushAll(name,user2);
+        redisTemplate.opsForList().rightPushAll(name, user1);
+        redisTemplate.opsForList().rightPushAll(name, user2);
         redisTemplate.opsForList().leftPop(name);
         System.out.println(redisTemplate.opsForList().range(name, 0, -1));
 
     }
 
     @Test
-    public void hash(){
+    public void hash() {
         String name = "my:hash";
-        Map<String,Object> testMap = new HashMap();
-        testMap.put("name","jack");
-        testMap.put("age",27);
-        testMap.put("class","1");
-        redisTemplate.opsForHash().putAll(name,testMap);
+        Map<String, Object> testMap = new HashMap();
+        testMap.put("name", "jack");
+        testMap.put("age", 27);
+        testMap.put("class", "1");
+        redisTemplate.opsForHash().putAll(name, testMap);
         //删除某个键值
         System.out.println(redisTemplate.opsForHash().delete(name, "name"));
         //得到某个键值
@@ -78,15 +77,14 @@ public class RedisTemplateTest {
         System.out.println(redisTemplate.opsForHash().keys(name));
 
 
-
     }
 
     @Test
-    public void set(){
+    public void set() {
         String name = "my:set";
-        String[] starArrays = new String[]{"star1","star2","star3"};
+        String[] starArrays = new String[]{"star1", "star2", "star3"};
         //放入会去重
-        redisTemplate.opsForSet().add(name,starArrays);
+        redisTemplate.opsForSet().add(name, starArrays);
         //是否包含member
         System.out.println(redisTemplate.opsForSet().isMember(name, "star2"));
         //包含的所有member
@@ -94,18 +92,36 @@ public class RedisTemplateTest {
         //随机获取value
         System.out.println(redisTemplate.opsForSet().randomMembers(name, 2));
     }
+
     @Test
-    public void zSet(){
+    public void zSet() {
         String name = "my:zset";
         String[] arrays = new String[]{};
-        ZSetOperations.TypedTuple<Object> objectTypedTuple1 = new DefaultTypedTuple("name1",1.0);
-        ZSetOperations.TypedTuple<Object> objectTypedTuple2 = new DefaultTypedTuple("name1",2.0);
-        ZSetOperations.TypedTuple<Object> objectTypedTuple3 = new DefaultTypedTuple("name2",2.0);
+        ZSetOperations.TypedTuple<Object> objectTypedTuple1 = new DefaultTypedTuple("name1", 1.0);
+        ZSetOperations.TypedTuple<Object> objectTypedTuple2 = new DefaultTypedTuple("name1", 2.0);
+        ZSetOperations.TypedTuple<Object> objectTypedTuple3 = new DefaultTypedTuple("name2", 2.0);
         Set<ZSetOperations.TypedTuple<Object>> tuples = new HashSet<>();
         tuples.add(objectTypedTuple1);
         tuples.add(objectTypedTuple2);
         tuples.add(objectTypedTuple3);
-        redisTemplate.opsForZSet().add(name,tuples);
+        redisTemplate.opsForZSet().add(name, tuples);
+    }
+
+    //    HyperLoglog
+    @Test
+    public void hyperLogLog() {
+        HyperLogLogOperations<String, Object> hyperLogLogOperations = redisTemplate.opsForHyperLogLog();
+        hyperLogLogOperations.add("book", "a", "b", "c", "d");
+        hyperLogLogOperations.add("bag", "a", "e", "d");
+        hyperLogLogOperations.add("del", "f", "g", "h");
+
+        System.out.println(hyperLogLogOperations.size("book"));
+        System.out.println(hyperLogLogOperations.size("bag"));
+
+        hyperLogLogOperations.delete("del");
+        System.out.println(hyperLogLogOperations.size("book", "bag", "del"));
+        hyperLogLogOperations.union("total", "book", "bag", "del");
+        System.out.println(hyperLogLogOperations.size("total"));
     }
 
 }
