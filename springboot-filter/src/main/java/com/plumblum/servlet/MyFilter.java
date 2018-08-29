@@ -23,7 +23,7 @@ public class MyFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(MyFilter.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-     logger.info("过滤器");
+     logger.info("初始化过滤器");
     }
 
     @Override
