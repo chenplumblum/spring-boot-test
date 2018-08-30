@@ -1,0 +1,15 @@
+1.注意在catch设置Rollback
+try {
+    userRepository.save(user);
+}catch (RuntimeException e){
+    logger.info("用户保存失败");
+    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//就是这一句了，加上之后，抛了异常,  会回滚
+}finally{
+
+}
+
+2.//    配置另起新的事务，这样保存事务才不会被影响到。
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void save(SysOprlog sysOprlog){
+        sysOprLogRepository.save(sysOprlog);
+    }

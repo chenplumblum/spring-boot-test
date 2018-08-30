@@ -22,7 +22,7 @@ public class UserRepositoryTest {
     @Test
     public void add(){
         UsersEntity usersEntity = new UsersEntity();
-        usersEntity.setId(123);
+        usersEntity.setId(11);
         usersEntity.setUserName("123");
         usersEntity.setPassWord("123");
         usersEntity.setNickName("123");
