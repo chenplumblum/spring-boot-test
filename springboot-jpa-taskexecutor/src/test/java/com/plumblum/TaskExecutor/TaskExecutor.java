@@ -21,6 +21,8 @@ public class TaskExecutor {
 
     @Test
     public void testHello(){
+        for(int i = 0;i<10;i++){
         hello.hello("你好");
+        }
     }
 }
