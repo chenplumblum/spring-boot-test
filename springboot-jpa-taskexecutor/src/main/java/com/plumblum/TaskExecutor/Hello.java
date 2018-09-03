@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Hello {
-    @Async
+//    指定某个线程连接池
+    @Async("taskExecutor")
     public void hello(String name){
         LoggerFactory.getLogger(Hello.class).info(name + ":Hello World!");
     }
