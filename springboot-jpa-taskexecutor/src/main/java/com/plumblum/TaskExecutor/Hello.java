@@ -1,5 +1,6 @@
 package com.plumblum.TaskExecutor;
 
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Hello {
-//    指定某个线程连接池
-    @Async("taskExecutor")
+
+
+
+    @Async
     public void hello(String name){
-        LoggerFactory.getLogger(Hello.class).info(name + ":Hello World!");
+        System.out.println(Thread.currentThread().getName()+name);
     }
+
+
 }
