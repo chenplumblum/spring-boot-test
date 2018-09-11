@@ -29,6 +29,7 @@ public class PasswordHelper {
         this.hashIterations = hashIterations;
     }
 
+//    对密码进行加密（用在新增用户，和修改密码）
     public void encryptPassword(User user) {
 
         user.setSalt(randomNumberGenerator.nextBytes().toHex());
@@ -36,7 +37,7 @@ public class PasswordHelper {
         String newPassword = new SimpleHash(
                 algorithmName,//加密算法
                 user.getPassword(),//密码
-                ByteSource.Util.bytes(user.getCredentialsSalt()),//盐值 username+salt
+                ByteSource.Util.bytes(user.getCredentialsSalt()),//盐值 username+salt（随机数）注意（插入数据库的只有salt（随机数））
                 hashIterations//hash次数
         ).toHex();
 
