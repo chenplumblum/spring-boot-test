@@ -1,0 +1,5 @@
+1.创建DemoEvent，继承ApplicationEvent，并重写构造方法
+2.创建DemoListener，实现implements ApplicationListener<DemoEvent>，并使用@Component注解（重要），并重写onApplicationEvent方法来监听
+3.创建DemoPublisher，并使用@Component注解，使用applicationContext去实现publishEvent方法来发布
+
+作用：Application Event为Bean和Bean之间的消息通讯提供支持。
