@@ -5,9 +5,11 @@
     <title>上传文件</title>
 </head>
 <body>
-<form method="POST" action="/upload" enctype="multipart/form-data">
+<form method="POST" action="/upload" enctype="multipart/form-data" target="hidden_frame">
     <input type="file" name="file" /><br/><br/>
     <input type="submit" value="上传文件" />
 </form>
+<%--form表单提交页面不刷新--%>
+<iframe name='hidden_frame' id="hidden_frame" style="display:none"></iframe>
 </body>
 </html>

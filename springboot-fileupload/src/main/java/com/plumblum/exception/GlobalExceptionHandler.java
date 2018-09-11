@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-// 上传错误的跳转提示
+    // 上传错误的跳转提示
     @ExceptionHandler(MultipartException.class)
     public String handleError(MultipartException e, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message",e.getCause().getMessage());

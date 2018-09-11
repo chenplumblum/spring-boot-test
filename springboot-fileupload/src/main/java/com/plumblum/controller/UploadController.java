@@ -39,8 +39,10 @@ public class UploadController {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "result";
         }
-        String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-        String filename = file.getOriginalFilename();// 取当前时间戳作为文件名
+        // 取文件格式后缀名
+        // String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+
+        String filename = file.getOriginalFilename();// 获取文件名
         String path = request.getServletContext().getRealPath("/upload/" + filename);// 存放位置
 
         File savefile = new File(path);
@@ -56,7 +58,6 @@ public class UploadController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return "result";
+        return "message";
     }
 }
