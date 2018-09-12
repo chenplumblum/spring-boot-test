@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @Auther: cpb
@@ -43,7 +40,7 @@ public class UploadController {
         // String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
 
         String filename = file.getOriginalFilename();// 获取文件名
-        String path = request.getServletContext().getRealPath("/upload/" + filename);// 存放位置
+        String path = request.getServletContext().getRealPath("/upload/" + filename);// 存放位置（tomcat文件夹下面）
 
         File savefile = new File(path);
         //判断上传文件的保存目录是否存在
