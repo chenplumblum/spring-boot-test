@@ -8,8 +8,8 @@ try {
 
 }
 
-2.//    配置另起新的事务，这样保存事务才不会被影响到。
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void save(SysOprlog sysOprlog){
-        sysOprLogRepository.save(sysOprlog);
-    }
+2.//配置另起新的事务，这样保存事务才不会被影响到。
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+public void save(SysOprlog sysOprlog){
+    sysOprLogRepository.save(sysOprlog);
+}

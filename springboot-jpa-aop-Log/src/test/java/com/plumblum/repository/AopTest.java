@@ -24,10 +24,11 @@ public class AopTest {
     public void save(){
         UsersEntity usersEntity = new UsersEntity();
         usersEntity.setId(55);
-        usersEntity.setUserName("123");
-        usersEntity.setPassWord("123");
-        usersEntity.setNickName("123");
-        usersEntity.setUserSex("nan ");
+        usersEntity.setUserName("124");
+        usersEntity.setPassWord("124");
+        usersEntity.setNickName("124");
+        usersEntity.setUserSex("女");
         userService.insert(usersEntity);
+
     }
 }

@@ -13,11 +13,12 @@ import javax.annotation.Resource;
  * @Date: 2018/8/30 09:31
  * @Description:
             */
-    @Service("sysOprLogService")
-    public class SysOprlogService {
+@Service("sysOprLogService")
+public class SysOprlogService {
 
     @Resource
     private SysOprLogRepository sysOprLogRepository;
+
 //    配置另起新的事务，这样保存事务才不会被影响到。
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void save(SysOprlog sysOprlog){

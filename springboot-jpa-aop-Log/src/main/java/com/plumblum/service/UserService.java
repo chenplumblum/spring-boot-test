@@ -30,16 +30,21 @@ public class UserService {
     @SysServiceLog(oprlogType="1",oprlogRemark="新增/修改用户",oprlogModule = "系统管理")
     public void insert(UsersEntity user){
 
-        try {
+//        try {
             userRepository.save(user);
+//            异常测试代码
 //            ArrayList list = new ArrayList(2);
 //            System.out.println(list.get(11));
-        }catch (RuntimeException e){
-            logger.info("用户保存失败");
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//就是这一句了，加上之后，抛了异常,  会回滚
-        }finally{
 
-        }
+
+/*         注意使用try catch捕捉异常无法启动SysServiceLogAspect的@AfterThrowing方法。                              */
+//        }catch (RuntimeException e){
+//            logger.info("用户保存失败");
+//            //就是这一句了，加上之后，抛了异常,  会回滚
+//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//        }finally{
+//
+//        }
 
 
     }
