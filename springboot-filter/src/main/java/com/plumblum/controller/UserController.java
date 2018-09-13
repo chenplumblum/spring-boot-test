@@ -14,17 +14,17 @@ import java.util.List;
  * @Description:
  */
 @RestController
-@RequestMapping("")
 public class UserController {
     @Resource
     private UserRepository userRepository;
 
-    @RequestMapping("/hello/*")
+
+    @RequestMapping("/getAll/all")
     public List<UsersEntity> getAll(){
        return userRepository.findAll();
     }
 
-    @RequestMapping("/*")
+    @RequestMapping("/getOne")
     public UsersEntity getOne(){
         return userRepository.getOne(1l);
     }

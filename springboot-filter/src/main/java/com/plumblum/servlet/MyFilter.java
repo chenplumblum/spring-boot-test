@@ -14,10 +14,8 @@ import java.io.IOException;
  * @Date: 2018/8/27 17:22
  * @Description:
  */
-@WebFilter(filterName="myFilter", urlPatterns = {
-        "/*",
-        "/hello/*"
-})
+//过滤的请求不会经过controller层
+@WebFilter(filterName="MyFilter",urlPatterns="/getAll/*")
 public class MyFilter implements Filter {
 
     private static Logger logger = LoggerFactory.getLogger(MyFilter.class);
