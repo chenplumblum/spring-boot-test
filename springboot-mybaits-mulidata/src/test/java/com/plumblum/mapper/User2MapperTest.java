@@ -2,6 +2,7 @@ package com.plumblum.mapper;
 
 
 import com.plumblum.mapper.test2.User2Mapper;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,8 +43,9 @@ public class User2MapperTest {
 //		userMapper.update(user);
 //		Assert.assertTrue(("neo".equals(userMapper.getOne(6l).getNickName())));
 //	}
-public void test2(){
-	userMapper.getAll();
-}
+	@Test
+	public void test2(){
+		System.out.println(userMapper.getAll().size());
+	}
 
 }

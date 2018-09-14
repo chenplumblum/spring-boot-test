@@ -49,7 +49,6 @@ public class User1MapperTest {
 
 	@Test
 	public void test1(){
-		List<UserEntity> list = userMapper.getAll();
-		System.out.println(list.size());
+		System.out.println(userMapper.getAll().size());
 	}
 }
