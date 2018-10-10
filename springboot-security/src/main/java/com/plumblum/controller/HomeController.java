@@ -19,4 +19,9 @@ public class HomeController {
         model.addAttribute("msg", msg);
         return "index";
     }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
