@@ -4,6 +4,7 @@ import com.plumblum.entity.SysUser;
 import com.plumblum.repository.SysUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @Service("userService")
-public class UserService {
+public class UserService  {
     @Autowired
     private SysUserRepository userRepository;
 
