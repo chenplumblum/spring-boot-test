@@ -29,22 +29,22 @@ public class RedisTest {
     public void redistest() {
 
         // 保存字符串
-        stringRedisTemplate.opsForValue().set("aaa", "111");
-        Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
+        stringRedisTemplate.opsForValue().set("admin", "111");
+        System.out.println(redisTemplate.opsForValue().get("admin"));
 
         // 保存对象
-        User user = new User("超人", 20);
-
-        System.out.println(user);
-        redisTemplate.opsForValue().set(user.getUsername(), user,12, TimeUnit.HOURS);
-
-        user = new User("蝙蝠侠", 30);
-        redisTemplate.opsForValue().set(user.getUsername(), user,12, TimeUnit.HOURS);
-
-        user = new User("蜘蛛侠", 40);
-        redisTemplate.opsForValue().set(user.getUsername(), user,12, TimeUnit.HOURS);
-
-        System.out.println(redisTemplate.opsForValue().get(user.getUsername()));
+//        User user = new User("超人", 20);
+//
+//        System.out.println(user);
+//        redisTemplate.opsForValue().set(user.getUsername(), user,12, TimeUnit.HOURS);
+//
+//        user = new User("蝙蝠侠", 30);
+//        redisTemplate.opsForValue().set(user.getUsername(), user,12, TimeUnit.HOURS);
+//
+//        user = new User("蜘蛛侠", 40);
+//        redisTemplate.opsForValue().set(user.getUsername(), user,12, TimeUnit.HOURS);
+//
+//        System.out.println(redisTemplate.opsForValue().get(user.getUsername()));
 
 
     }

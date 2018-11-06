@@ -1,6 +1,6 @@
 package com.plumblum.redis.test;
 
-import com.plumblum.redis.User;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +9,8 @@ import org.springframework.data.redis.core.HyperLogLogOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -25,37 +27,65 @@ public class RedisTemplateTest {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Resource
+    private JedisPool jedisPool;
+
+    @Test
+    public void testString(){
+        Jedis jedis = jedisPool.getResource();
+        jedis.set("test","test");
+        System.out.println(jedis.get("test"));
+    }
     @Test
     public void string() {
         //set(name,value,time,timeUnit,offset(偏移量))
 
+//      存对象
         User user = new User("你好", 20);
         redisTemplate.opsForValue().set(user.getUsername(), user);
-        System.out.println(redisTemplate.opsForValue().get(user.getUsername()));
-
+//      对象+过期时间
         redisTemplate.opsForValue().set(user.getUsername(), user, 4, TimeUnit.HOURS);
-        System.out.println(redisTemplate.opsForValue().get(user.getUsername()));
 
+//      long
         String name = "increment";
         Long i = 10L;
         redisTemplate.opsForValue().set(name, i);
+//      给定自增量
         redisTemplate.opsForValue().increment(name, i);
+//      给定自减量
+        redisTemplate.opsForValue().increment(name, -i);
+        redisTemplate.opsForValue().increment("name",1);
+
+//      返回value长度
+        System.out.println(redisTemplate.opsForValue().size(name));
+
+//      string
+        String name1 = "string";
+        String value1 = "string";
+        redisTemplate.opsForValue().set(name1,value1);
+//        APPEND key value
+        redisTemplate.opsForValue().append(name1," 你好");
+
+//        setIfAbsent（是否存在key或value）
+
+
 
 
     }
 
     @Test
     public void list() {
-        String name = "my:listRight";
+        String name = "my:listTest";
         ArrayList<User> list = new ArrayList<>();
-        User user1 = new User("你好", 20);
-        User user2 = new User("谢谢", 23);
+        User user1 = new User("你好吗", 20);
+        User user2 = new User("谢谢你", 23);
         list.add(user1);
         list.add(user2);
         redisTemplate.opsForList().rightPushAll(name, user1);
         redisTemplate.opsForList().rightPushAll(name, user2);
         redisTemplate.opsForList().leftPop(name);
         System.out.println(redisTemplate.opsForList().range(name, 0, -1));
+        System.out.println(redisTemplate.opsForList().size(name));
 
     }
 
@@ -123,5 +153,6 @@ public class RedisTemplateTest {
         hyperLogLogOperations.union("total", "book", "bag", "del");
         System.out.println(hyperLogLogOperations.size("total"));
     }
+
 
 }

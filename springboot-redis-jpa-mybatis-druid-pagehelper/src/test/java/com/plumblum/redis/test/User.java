@@ -1,4 +1,4 @@
-package com.plumblum.redis;
+package com.plumblum.redis.test;
 
 import java.io.Serializable;
 
