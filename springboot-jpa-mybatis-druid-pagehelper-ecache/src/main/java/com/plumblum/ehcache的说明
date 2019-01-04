@@ -3,4 +3,5 @@
 @Cacheable  ：先从缓存中查询，如果没有则查询数据库
 @CacheEvict  :清空缓存
 @CachePut  : 更新的时候刷新到缓存
+@CacheConfig :配置共性缓存
 3.application.properties配置 配置文件的位置。

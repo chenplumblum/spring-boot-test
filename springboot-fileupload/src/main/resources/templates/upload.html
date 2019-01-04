@@ -9,7 +9,43 @@
     <input type="file" name="file" /><br/><br/>
     <input type="submit" value="上传文件" />
 </form>
-<%--form表单提交页面不刷新--%>
+<!--form表单提交页面不刷新-->
 <iframe name='hidden_frame' id="hidden_frame" style="display:none"></iframe>
+
+
+<!--<form id="upload" enctype="multipart/form-data" method="post">-->
+    <!--<input type="file" name="file" id="pic"/>-->
+    <!--<input type="button" value="提交" onclick="uploadPic();"/>-->
+    <!--<span class="showUrl"></span>-->
+    <!--<img src="" class="showPic" alt="">-->
+<!--</form>-->
 </body>
 </html>
+<!--<script>-->
+    <!--function uploadPic() {-->
+        <!--var form = document.getElementById('upload'),-->
+            <!--formData = new FormData(form);-->
+        <!--$.ajax({-->
+            <!--url:"/upload",-->
+            <!--type:"post",-->
+            <!--data:formData,-->
+            <!--processData:false,-->
+            <!--contentType:false,-->
+            <!--success:function(res){-->
+                <!--if(res){-->
+                    <!--alert("上传成功！");-->
+                <!--}-->
+                <!--console.log(res);-->
+                <!--$("#pic").val("");-->
+                <!--$(".showUrl").html(res);-->
+                <!--$(".showPic").attr("src",res);-->
+            <!--},-->
+            <!--error:function(err){-->
+                <!--alert("网络连接失败,稍后重试",err);-->
+            <!--}-->
+
+        <!--})-->
+
+    <!--}-->
+<!--</script>-->
+<!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>-->

@@ -50,7 +50,7 @@ public class UploadController {
             savefile.mkdir();
         }
         try {
-            // FileUtils.copyInputStreamToFile()这个方法里对IO进行了自动操作，不需要额外的再去关闭IO流
+
             FileUtils.copyInputStreamToFile(file.getInputStream(), savefile);// 复制临时文件到指定目录下
         } catch (IOException e) {
             e.printStackTrace();
