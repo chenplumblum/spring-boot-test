@@ -2,6 +2,7 @@ package com.plumblum.entity;
 
 import javax.persistence.*;
 
+
 /**
  * @Auther: cpb
  * @Date: 2018/8/10 10:17
@@ -79,4 +80,6 @@ public class Role {
         result = 31 * result + (available != null ? available.hashCode() : 0);
         return result;
     }
+
+
 }

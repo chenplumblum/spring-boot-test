@@ -13,3 +13,6 @@ spring:
 
 mybatis:
   type-aliases-package: com.plumblum.entity
+  mapper-locations: classpath*:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

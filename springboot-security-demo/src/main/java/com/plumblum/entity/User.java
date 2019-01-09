@@ -2,6 +2,7 @@ package com.plumblum.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Auther: cpb
@@ -99,5 +100,21 @@ public class User implements Serializable{
     //验证盐
     public String getCredentialsSalt() {
         return username + salt;
+    }
+
+
+    /**
+     * 用户角色
+     */
+
+    @Transient
+    private List<Role> roleList;
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }
