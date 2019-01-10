@@ -1,20 +1,19 @@
 package com.plumblum.authentication;
 
-import com.plumblum.entity.Permission;
-import com.plumblum.entity.Role;
-import com.plumblum.entity.User;
+import com.plumblum.entity.SysPermission;
+import com.plumblum.entity.SysUser;
 import com.plumblum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @Auther: cpb
@@ -32,21 +31,20 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByName(username);
-        if (null == user) {
-            throw new UsernameNotFoundException(username);
+        SysUser user =  userService.findByName(username);
+        if (user != null) {
+            List<SysPermission> permissions = userService.findByAdminUserId(user.getId());
+            List<GrantedAuthority> grantedAuthorities = new ArrayList <>();
+            for (SysPermission permission : permissions) {
+                if (permission != null && permission.getPermission()!=null) {
+
+                    GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getPermission());
+                    grantedAuthorities.add(grantedAuthority);
+                }
+            }
+            return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        } else {
+            throw new UsernameNotFoundException("admin: " + username + " do not exist!");
         }
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        //获取角色和权限set
-        List<String> roleList= userService.findRoles(user.getUsername());
-        List<String> permissionList= userService.findPermissions(user.getUsername());
-//        Set<String> role = new HashSet<>(roleList);
-//        Set<String> permission = new HashSet<>(permissionList.size());
-//        role.addAll(roleList);
-//        permission.addAll(permissionList);
-        for(String permissionName : permissionList){
-            authorities.add(new SimpleGrantedAuthority(permissionName));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }

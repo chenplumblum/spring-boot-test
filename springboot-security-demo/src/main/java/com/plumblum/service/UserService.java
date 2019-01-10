@@ -2,10 +2,9 @@ package com.plumblum.service;
 
 import com.plumblum.dao.PermissionDao;
 import com.plumblum.dao.RoleDao;
-import com.plumblum.dao.UserDao;
-import com.plumblum.entity.User;
+import com.plumblum.entity.SysPermission;
+import com.plumblum.entity.SysUser;
 import com.plumblum.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,7 +26,7 @@ public class UserService {
     @Resource
     private RoleDao roleDao;
 
-    public User findByName(String userName) {
+    public SysUser findByName(String userName) {
         return userRepository.findByName(userName);
     }
 
@@ -39,5 +38,12 @@ public class UserService {
 
     public List<String> findRoles(String userName) {
         return roleDao.findRoles(userName);
+    }
+
+    public List<SysPermission> findAll(){
+        return permissionDao.findAll();
+    }
+    public List<SysPermission> findByAdminUserId(long userId){
+        return permissionDao.findByAdminUserId(userId);
     }
 }

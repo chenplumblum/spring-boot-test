@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "sys_permission", schema = "shiro", catalog = "")
-public class Permission {
+public class SysPermission {
     @Id
     private long id;
     private String permission;
@@ -61,7 +61,7 @@ public class Permission {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Permission that = (Permission) o;
+        SysPermission that = (SysPermission) o;
 
         if (id != that.id) return false;
         if (permission != null ? !permission.equals(that.permission) : that.permission != null) return false;

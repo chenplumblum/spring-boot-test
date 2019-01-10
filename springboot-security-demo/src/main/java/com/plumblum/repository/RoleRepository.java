@@ -1,6 +1,6 @@
 package com.plumblum.repository;
 
-import com.plumblum.entity.Role;
+import com.plumblum.entity.SysRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date: 2018/8/7 20:07
  * @Description:
  */
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface RoleRepository extends JpaRepository<SysRole,Long> {
 }

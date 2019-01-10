@@ -11,9 +11,9 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sys_user", schema = "shiro", catalog = "")
-public class User implements Serializable{
+public class SysUser implements Serializable{
 
-    private static final long serialVersionUID = 123L;////xxxx看自己喜欢
+    private static final long serialVersionUID = 123L;////
     @Id
     private long id;
     private String username;
@@ -76,13 +76,13 @@ public class User implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        SysUser sysUser = (SysUser) o;
 
-        if (id != user.id) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (salt != null ? !salt.equals(user.salt) : user.salt != null) return false;
-        if (locked != null ? !locked.equals(user.locked) : user.locked != null) return false;
+        if (id != sysUser.id) return false;
+        if (username != null ? !username.equals(sysUser.username) : sysUser.username != null) return false;
+        if (password != null ? !password.equals(sysUser.password) : sysUser.password != null) return false;
+        if (salt != null ? !salt.equals(sysUser.salt) : sysUser.salt != null) return false;
+        if (locked != null ? !locked.equals(sysUser.locked) : sysUser.locked != null) return false;
 
         return true;
     }
@@ -108,12 +108,12 @@ public class User implements Serializable{
      */
 
     @Transient
-    private List<Role> roleList;
+    private List<SysRole> sysRoleList;
 
-    public User() {
+    public SysUser() {
     }
 
-    public User(String username, String password) {
+    public SysUser(String username, String password) {
         this.username = username;
         this.password = password;
     }

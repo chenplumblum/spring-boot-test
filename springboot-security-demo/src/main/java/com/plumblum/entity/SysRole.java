@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "sys_role", schema = "shiro", catalog = "")
-public class Role {
+public class SysRole {
     @Id
     private long id;
     private String role;
@@ -62,12 +62,12 @@ public class Role {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Role role1 = (Role) o;
+        SysRole sysRole1 = (SysRole) o;
 
-        if (id != role1.id) return false;
-        if (role != null ? !role.equals(role1.role) : role1.role != null) return false;
-        if (description != null ? !description.equals(role1.description) : role1.description != null) return false;
-        if (available != null ? !available.equals(role1.available) : role1.available != null) return false;
+        if (id != sysRole1.id) return false;
+        if (role != null ? !role.equals(sysRole1.role) : sysRole1.role != null) return false;
+        if (description != null ? !description.equals(sysRole1.description) : sysRole1.description != null) return false;
+        if (available != null ? !available.equals(sysRole1.available) : sysRole1.available != null) return false;
 
         return true;
     }
