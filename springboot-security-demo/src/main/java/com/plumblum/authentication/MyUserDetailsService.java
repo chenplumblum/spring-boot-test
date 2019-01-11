@@ -35,10 +35,10 @@ public class MyUserDetailsService implements UserDetailsService {
         SysUser user =  userService.findByName(username);
         if (user != null) {
             List<GrantedAuthority> grantedAuthorities = new ArrayList <>();
-//            List<SysPermission> permissions = userService.findPermissionByUserId(user.getId());
-//            for (SysPermission permission : permissions) {
-//                grantedAuthorities.add(new SimpleGrantedAuthority(permission.getPermission()));
-//            }
+            List<SysPermission> permissions = userService.findPermissionByUserId(user.getId());
+            for (SysPermission permission : permissions) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(permission.getPermission()));
+            }
             List<SysRole> roles = userService.findRoleByUserId(user.getId());
             for (SysRole role : roles) {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));

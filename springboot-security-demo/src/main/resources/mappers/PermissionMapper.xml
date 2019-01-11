@@ -6,7 +6,7 @@
    SELECT * from Sys_permission ;
 </select>
 
- <select id="findByAdminUserId" parameterType="long" resultType="com.plumblum.entity.SysPermission">
+ <select id="findPermissionByUserId" parameterType="long" resultType="com.plumblum.entity.SysPermission">
         SELECT
             p.*
         FROM

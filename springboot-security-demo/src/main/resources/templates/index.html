@@ -40,6 +40,15 @@
         <div sec:authorize="hasRole('ROLE_USER')">
             <p class="bg-info">无更多显示信息</p>
         </div>
+        <div sec:authorize="hasRole('USER_CREATE')">
+            <p class="bg-info">用户模块新增</p>
+        </div>
+        <div sec:authorize="hasRole('USER_DELETE')">
+            <p class="bg-info">用户模块删除</p>
+        </div>
+        <div sec:authorize="hasRole('MENU_INSERT')">
+            <p class="bg-info">菜单模块新增</p>
+        </div>
         <form th:action="@{/logout}" method="post">
             <input type="submit" class="btn btn-primary" value="注销"/>
         </form>
