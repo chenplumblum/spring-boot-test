@@ -6,4 +6,14 @@
     where u.username=#{userName}
     and u.id=ur.user_id and r.id=ur.role_id
 </select>
+
+<select id="findRoleByUserId" parameterType="long" resultType="com.plumblum.entity.SysRole">
+    SELECT
+        r.*
+    FROM
+        Sys_User u
+    inner JOIN sys_user_role sru ON u.id = sru.user_id
+    inner JOIN Sys_Role r ON sru.role_id = r.id
+    where u.id=#{userId}
+</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.plumblum.service;
 import com.plumblum.dao.PermissionDao;
 import com.plumblum.dao.RoleDao;
 import com.plumblum.entity.SysPermission;
+import com.plumblum.entity.SysRole;
 import com.plumblum.entity.SysUser;
 import com.plumblum.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,11 @@ public class UserService {
     public List<SysPermission> findAll(){
         return permissionDao.findAll();
     }
-    public List<SysPermission> findByAdminUserId(long userId){
-        return permissionDao.findByAdminUserId(userId);
+    public List<SysPermission> findPermissionByUserId(long userId){
+        return permissionDao.findPermissionByUserId(userId);
+    }
+
+    public List<SysRole> findRoleByUserId(long userId){
+        return roleDao.findRoleByUserId(userId);
     }
 }

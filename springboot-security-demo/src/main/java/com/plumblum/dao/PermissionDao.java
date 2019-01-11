@@ -14,5 +14,5 @@ import java.util.List;
 public interface PermissionDao {
     List<String> findPermissions(String userName);
     public List<SysPermission> findAll();
-    public List<SysPermission> findByAdminUserId(long userId);
+    public List<SysPermission> findPermissionByUserId(long userId);
 }

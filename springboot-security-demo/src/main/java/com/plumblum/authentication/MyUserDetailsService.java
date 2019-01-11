@@ -1,6 +1,7 @@
 package com.plumblum.authentication;
 
 import com.plumblum.entity.SysPermission;
+import com.plumblum.entity.SysRole;
 import com.plumblum.entity.SysUser;
 import com.plumblum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,14 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user =  userService.findByName(username);
         if (user != null) {
-            List<SysPermission> permissions = userService.findByAdminUserId(user.getId());
             List<GrantedAuthority> grantedAuthorities = new ArrayList <>();
-            for (SysPermission permission : permissions) {
-                if (permission != null && permission.getPermission()!=null) {
-
-                    GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getPermission());
-                    grantedAuthorities.add(grantedAuthority);
-                }
+//            List<SysPermission> permissions = userService.findPermissionByUserId(user.getId());
+//            for (SysPermission permission : permissions) {
+//                grantedAuthorities.add(new SimpleGrantedAuthority(permission.getPermission()));
+//            }
+            List<SysRole> roles = userService.findRoleByUserId(user.getId());
+            for (SysRole role : roles) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
             }
             return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
         } else {
