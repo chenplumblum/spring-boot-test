@@ -84,13 +84,13 @@ public class AbstractObject {
                         continue;
                     }
                     if(targetField != null) {
-                        Class<?> test = getListGenericType(targetField);
-                        Class<?> cloneTargetClazz = getListGenericType(targetField);
+                        Type[] type = getSetGenericType(targetField);
+                        Class<?> cloneKey = (Class<?>) type[0];
+                        Class<?> cloneValue = (Class<?>) type[1];
                         // 获取要克隆的目标类型
                         // 将list集合克隆到目标list集合中去
                         HashMap clonedMap = new HashMap<>();
-                        // TODO: 2020/3/27  
-                        cloneMap(map, clonedMap, cloneTargetClazz, cloneDirection);
+                        cloneMap(map, clonedMap,cloneKey, cloneValue, cloneDirection);
 
                         // 获取设置克隆好的clonedSet的方法名称
                         Method setFieldMethod = getSetCloneFieldMethodName(field, clazz);
@@ -172,11 +172,11 @@ public class AbstractObject {
      * @param field
      * @return
      */
-    private ParameterizedType parameterizedType(Field field) {
+    private Type[] getSetGenericType(Field field) {
         Type genericType = field.getGenericType();
         if (genericType instanceof ParameterizedType) {
             ParameterizedType parameterizedType = (ParameterizedType) genericType;
-            return parameterizedType;
+            return parameterizedType.getActualTypeArguments();
         }
         return null;
     }
@@ -223,16 +223,43 @@ public class AbstractObject {
         }
     }
 
-    /**
-     * 将一个Map克隆到另外一个Map
-     *
-     * @param sourceList
-     * @param targetList
-     * @param cloneTargetClazz
-     * @param cloneDirection
-     */
-    private void cloneMap(Map sourceList, Map targetList, Class cloneTargetClazz, Integer cloneDirection) {
 
+    private void cloneMap(Map sourceMap, Map targetMap, Class cloneKey,Class cloneValue, Integer cloneDirection) {
+        //开始从paramMap中复制到resultMap中
+        if (null == sourceMap ||sourceMap.isEmpty()){
+            return;
+        }
+        Iterator it=sourceMap.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry entry=(Map.Entry)it.next();
+            Object key=entry.getKey();
+            Object value = entry.getValue();
+            if(key instanceof AbstractObject) {
+                AbstractObject targetKey = (AbstractObject) key;
+                AbstractObject clonedObjectKey = (AbstractObject) targetKey.clone(cloneKey, cloneDirection);
+                if (value instanceof AbstractObject){
+                    AbstractObject targetValue = (AbstractObject) value;
+                    AbstractObject clonedObjectValue = (AbstractObject) targetValue.clone(cloneValue, cloneDirection);
+                    targetMap.put(clonedObjectKey,clonedObjectValue);
+                }else {
+                    targetMap.put(clonedObjectKey,value);
+                }
+            }else {
+                if (value instanceof AbstractObject){
+                    AbstractObject targetValue = (AbstractObject) value;
+                    AbstractObject clonedObjectValue = (AbstractObject) targetValue.clone(cloneValue, cloneDirection);
+                    targetMap.put(key,clonedObjectValue);
+                }else {
+                    targetMap.put(key,value);
+                }
+            }
+
+
+            
+//            if(key!=null && sourceMap.get(key)!=null) {
+//                targetMap.put(key, paramMap.get(key));
+//            }
+        }
     }
 
     /**

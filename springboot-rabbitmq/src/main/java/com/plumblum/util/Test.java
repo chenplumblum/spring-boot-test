@@ -23,11 +23,12 @@ public class Test extends AbstractObject{
         test.setDemo("12314");
 
         Test demo =new Test();
-        test.setDemo("demo");
+        demo.setDemo("demo");
         hashMap.put("demo",demo);
         test.setMap(hashMap);
 
-        test.clone(Test.class,1);
+        Test clone = test.clone(Test.class, 1);
+        System.out.println(clone);
 
     }
 }
