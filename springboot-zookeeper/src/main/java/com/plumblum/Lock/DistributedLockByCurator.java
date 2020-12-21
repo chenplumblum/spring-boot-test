@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
 
 /**
  * @Auther: cpb
@@ -26,7 +27,7 @@ public class DistributedLockByCurator implements InitializingBean {
     private CountDownLatch countDownLatch = new CountDownLatch(1);
 
     @Autowired
-    private CuratorFramework curatorFramework;
+    private   CuratorFramework curatorFramework;
 
 
     /**
@@ -80,6 +81,7 @@ public class DistributedLockByCurator implements InitializingBean {
      * 创建 watcher 事件
      */
     private void addWatcher(String path) throws Exception {
+
         String keyPath;
         if (path.equals(ROOT_PATH_LOCK)) {
             keyPath = "/" + path;
@@ -102,6 +104,7 @@ public class DistributedLockByCurator implements InitializingBean {
 
     //该方法为Bean初始化后的回调函数
     //创建父节点，并创建永久节点
+    @Override
     public void afterPropertiesSet() {
         curatorFramework = curatorFramework.usingNamespace("lock-namespace");
         String path = "/" + ROOT_PATH_LOCK;

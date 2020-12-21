@@ -1,9 +1,8 @@
 package com.plumblum.util;
-import java.util.HashMap;
-import com.plumblum.util.Test;
 
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,19 +11,19 @@ import java.util.Map;
  * @date 2020/3/27 17:15
  */
 @Data
-public class Test extends AbstractObject{
+public class Test extends AbstractObject {
     private String demo;
 
-    private Map<String,Test> map;
+    private Map<String, Test> map;
 
     public static void main(String[] args) {
         HashMap<String, Test> hashMap = new HashMap<>();
-        Test test =new Test();
+        Test test = new Test();
         test.setDemo("12314");
 
-        Test demo =new Test();
+        Test demo = new Test();
         demo.setDemo("demo");
-        hashMap.put("demo",demo);
+        hashMap.put("demo", demo);
         test.setMap(hashMap);
 
         Test clone = test.clone(Test.class, 1);
